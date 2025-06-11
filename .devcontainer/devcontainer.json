@@ -7,8 +7,8 @@
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
     "ghcr.io/devcontainers/features/java:1": {
       "version": "21",
-      "mavenVersion": "3.9.9",
-      "installGradle": false
+      "installMaven": "true",
+      "mavenVersion": "3.9.9"
     }
   }
 }
