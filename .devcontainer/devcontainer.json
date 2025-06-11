@@ -1,6 +1,6 @@
 {
   "name": "Prototype Development Container",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu:latest",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-latest",
 
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
