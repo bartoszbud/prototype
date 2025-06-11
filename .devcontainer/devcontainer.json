@@ -1,0 +1,14 @@
+{
+  "name": "Prototype Development Container",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu:latest",
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "mavenVersion": "3.9.9",
+      "installGradle": false
+    }
+  }
+}
