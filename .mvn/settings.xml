@@ -27,8 +27,8 @@
     <mirrors>
       <mirror>
         <id>prototype</id>
-        <name>Project Maven Central mirror</name>
-        <url>${env.REPOSITORY_URL}</url>
+        <name>Maven Central mirror</name>
+        <url>https://repo.maven.apache.org/maven2/</url>
         <mirrorOf>central</mirrorOf>
       </mirror>
     </mirrors>
