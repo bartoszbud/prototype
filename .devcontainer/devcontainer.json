@@ -12,5 +12,26 @@
     }
   },
 
-  "postCreateCommand": "sudo git config --system --add safe.directory \"*\";mvn -N wrapper:wrapper"
+  "postCreateCommand": "sudo git config --system --add safe.directory \"*\";mvn -N wrapper:wrapper",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "dev.containers.copyGitConfig": true,
+        "files.eol": "\n",
+        "terminal.integrated.scrollback": 1000,
+        "terminal.integrated.profiles.linux": "bash",
+        "terminal.integrated.defaultProfile.linux": "bash",
+      },
+      "extensions": [
+        "github.vscode-github-actions",
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "timonwong.shellcheck",
+        "davidanson.vscode-markdownlint",
+        "streetsidesoftware.code-spell-checker",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
