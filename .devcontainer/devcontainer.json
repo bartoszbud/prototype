@@ -10,5 +10,7 @@
       "installMaven": "true",
       "mavenVersion": "3.9.5"
     }
-  }
+  },
+
+  "postCreateCommand": "sudo git config --system --add safe.directory \"*\";mvn -N wrapper:wrapper"
 }
