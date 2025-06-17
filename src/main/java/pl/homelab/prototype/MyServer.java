@@ -16,7 +16,7 @@ public class MyServer {
     public void Start(int port) {
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
-            System.out.println("server started at " + port);
+            System.out.println("Server is listening on port " + port);
             server.createContext("/hello", new RootHandler());
             server.setExecutor(null);
             server.start();
@@ -27,7 +27,7 @@ public class MyServer {
 
     public void Stop() {
         server.stop(0);
-        System.out.println("server stopped");
+        System.out.println("Server stopped");
     }
 
     public static class RootHandler implements HttpHandler {
