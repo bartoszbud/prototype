@@ -1,8 +1,5 @@
 package pl.homelab.prototype;
 
-/**
- * Hello World Example.
- */
 public class HelloMain {
     public static String defaultPort = "8080";
 
