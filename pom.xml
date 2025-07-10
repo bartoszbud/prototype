@@ -72,7 +72,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>pl.homelab.prototype</mainClass>
+                <mainClass>pl.homelab.prototype.HelloMain</mainClass>
               </manifest>
             </archive>
           </configuration>
