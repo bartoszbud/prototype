@@ -24,3 +24,9 @@ jobs:
           server-id: projectrepo
           settings-path: ${{ github.workspace }}/.mvn
           cache: maven
+      - name: Maven Test
+        id: maven-test
+        run: |
+          mvn --settings ${{ github.workspace }}/.mvn/settings.xml wrapper:wrapper
+          mvn --settings ${{ github.workspace }}/.mvn/settings.xml dependecy:resolve
+          mvn --settings ${{ github.workspace }}/.mvn/settings.xml test
