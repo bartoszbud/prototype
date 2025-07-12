@@ -4,9 +4,9 @@ name: Unit tests
 on:
   pull_request_target:
     types:
-    - opened
-    - synchronize
-    - reopened
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
   test:
