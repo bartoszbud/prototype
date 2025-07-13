@@ -77,7 +77,7 @@ public class HelloServerTest
     public void shouldAnswerWithFalse()
     {
         httpserver.Stop();
-        assertFalse(Utils.serverListening("localhost", 9090));
+        assertFalse(Utils.serverListening("localhost", 8090));
     }
 
 }
