@@ -16,6 +16,6 @@ public class HelloMainTest
     {
         HelloMain hm = new HelloMain();
         hm.main(null);
-        assertTrue(Utils.serverListening("localhost", 8080));
+        assertTrue(Utils.serverListening("localhost", 9090));
     }
 }
