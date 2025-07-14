@@ -1,4 +1,4 @@
 unit test workflow runs with pull_request not pull_request_targer, no idea why but probably it is not issue at all due to the fact that pull_request does no use secrets
 
-unit test workflow runs with pull_request not pull_request_targer, no idea why but probably it is not issue at all due to the fact that pull_request does no use secrets
-unit tests does not start after merged...
+pull_request_target refers to target in the meaning of branch where code changes will be merged feature/x > main, main is target and this will expect workflow on targer branch
+
