@@ -56,6 +56,10 @@ jobs:
         id: maven-test
         run: |
           mvn --settings ${{ github.workspace }}/.mvn/settings.xml wrapper:wrapper
-          mvn --settings ${{ github.workspace }}/.mvn/settings.xml dependency:resolve
-          mvn --settings ${{ github.workspace }}/.mvn/settings.xml test
-    
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml dependency:resolve
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml test
+      - name: Maven Build
+        id: maven-build
+        run: |
+          ./mvnw versions:set -DnewVersion=SHA-${{ github.sha }} -DgenerateBackupPoms=false
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml package -DskipTests
