@@ -7,11 +7,43 @@ on:
       - main
 
 jobs:
+  check:
+    name: GitHub Prerequisites Check
+    runs-on: ubuntu-latest
+    outputs:
+      has_gh_secrets: ${{ steps.check-gh-key-secret.outputs.declared }}
+    steps:
+      - name: Check for GitHub Secret availability
+        id: check-gh-key-secret
+        shell: bash
+        run: |
+          if [[ ! -z  "${{ secrets.GITHUB_TOKEN }}" ]]; then
+            echo "All secrets are declared."
+            echo "declared=true" >> $GITHUB_OUTPUT;
+          else
+            echo "GITHUB_TOKEN secret is missing."
+            exit 1
+          fi
   main:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    needs: check
+    if: |
+      needs.check.outputs.has_gh_secrets == 'true'
+    env:
+      GITHUB_REPOSITORY: "https://maven.pkg.github.com/${{ github.repository }}"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - uses: benjlevesque/short-sha@v2.2
+        id: short-sha
+        with:
+          length: 7
+      - run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.short_sha }}
       - name: Set up Java
         uses: actions/setup-java@v3
         with: 
@@ -24,5 +56,18 @@ jobs:
         id: maven-test
         run: |
           mvn --settings ${{ github.workspace }}/.mvn/settings.xml wrapper:wrapper
-          mvn --settings ${{ github.workspace }}/.mvn/settings.xml dependency:resolve
-          mvn --settings ${{ github.workspace }}/.mvn/settings.xml test
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml dependency:resolve
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml test
+      - name: Maven Build
+        if: success()
+        id: maven-build
+        run: |
+          ./mvnw versions:set -DnewVersion=SHA-${{ github.sha }} -DgenerateBackupPoms=false
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml package -DskipTests
+      - name: Publish to GitHub Packages
+        if: success()
+        id: publish
+        run: |
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
