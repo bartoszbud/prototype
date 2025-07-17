@@ -67,7 +67,7 @@ jobs:
         if: success()
         id: maven-build
         run: |
-          ./mvnw versions:set -DnewVersion=SHA-${{ github.sha }} -DgenerateBackupPoms=false
+          ./mvnw versions:set -DnewVersion=SHA-${{ env.SHA }} -DgenerateBackupPoms=false
           ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml package -DskipTests
       - name: Publish to GitHub Packages
         if: success()
