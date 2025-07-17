@@ -73,6 +73,6 @@ jobs:
         if: success()
         id: publish
         run: |
-          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml --batch-mode deploy
+          ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml -X --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
