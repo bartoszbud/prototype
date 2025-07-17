@@ -21,7 +21,7 @@
     <repository>
       <id>prototype</id>
       <name>Project Repository</name>
-      <url>${env.GITHUB_REPOSITORY}</url>
+      <url>${env.REPOSITORY_URL}</url>
     </repository>
   </distributionManagement>
 
