@@ -54,7 +54,7 @@ jobs:
         with: 
           java-version: '21'
           distribution: 'temurin'
-          server-id: projectrepo
+          server-id: prototype
           settings-path: ${{ github.workspace }}/.mvn
           cache: maven
       - name: Maven Test
