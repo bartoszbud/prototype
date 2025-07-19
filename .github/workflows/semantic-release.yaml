@@ -48,7 +48,7 @@ jobs:
       issues: write  # required to create issues if version changes are detected
       pull-requests: write  # required to create pull requests if version changes are detected
     outputs:
-      new_release_publish: ${{ steps.semantic_dry.outputs.new_release_publish }}
+      new_release_published: ${{ steps.semantic_dry.outputs.new_release_published }}
       new_release_version: ${{ steps.semantic_dry.outputs.new_release_version }}
     steps:
       - name: Checkout
@@ -78,7 +78,7 @@ jobs:
     needs: [check, check_version]
     if: |
       needs.check.outputs.has_gh_secrets
-      && needs.check_version.outputs.new_release_publish
+      && needs.check_version.outputs.new_release_published
       && github.actor != 'nektos/act'
     permissions:
       contents: write  # to be able to publish a GitHub release
@@ -116,7 +116,7 @@ jobs:
           echo ${{ steps.semantic.outputs.new_release_version }}
 
     outputs:
-      new_release: ${{ steps.semantic.outputs.new_release_publish }}
+      new_release: ${{ steps.semantic.outputs.new_release_published }}
       new_version: ${{ steps.semantic.outputs.new_release_version }}
 
   github-publish:
