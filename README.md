@@ -17,3 +17,5 @@
 ```bash
 java -jar target/${artifactId}-${version}.jar
 ```
+
+## Adjust application properties
