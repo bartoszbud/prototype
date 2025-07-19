@@ -22,7 +22,6 @@ import java.io.ByteArrayInputStream;
 import java.util.stream.Collectors;
 import java.nio.charset.StandardCharsets;
 
-
 /**
  * Unit test for simple App.
  */
