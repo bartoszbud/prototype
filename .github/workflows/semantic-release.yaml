@@ -44,7 +44,7 @@ jobs:
     if: |
       needs.check.outputs.has_gh_secrets && github.actor != 'nektos/act'
     permissions:
-      contents: read  # required to read the repository content
+      contents: write  # required to read the repository content
       issues: write  # required to create issues if version changes are detected
       pull-requests: write  # required to create pull requests if version changes are detected
     outputs:
