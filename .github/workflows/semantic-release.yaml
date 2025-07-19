@@ -74,7 +74,7 @@ jobs:
             @semantic-release/git@10.0.1
 
   tag_version:
-    name: release
+    name: Release
     needs: [check, check_version]
     if: |
       needs.check.outputs.has_gh_secrets
