@@ -2,16 +2,39 @@
 name: Build, Test and Publish
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: |
+          'Version to manually release'
+        required: true
+        type: string
+      dry_run:
+        description: |
+          'Dry run mode build but do not publish'
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      release_tag:
+        description: |
+          'Version to manually release'
+        required: true
+        type: string
+      dry_run:
+        description: |
+          'Dry run mode build but do not publish'
+        type: boolean
+        default: true
 
 permissions:
   id-token: write
   contents: write
   packages: write
+  pull-requests: write
 
 jobs:
+
   check:
     name: GitHub Prerequisites Check
     runs-on: ubuntu-latest
@@ -29,6 +52,16 @@ jobs:
             echo "GITHUB_TOKEN secret is missing."
             exit 1
           fi
+      - name: Release Title - ${{ inputs.release_tag }}
+        if: ( inputs.dry_run == false )
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "v${{ inputs.release_tag }}"
+          append_body: true
+          body: |
+            ## GitHub Packages
+          token: ${{ secrets.GITHUB_TOKEN }}
+  
   main:
     runs-on: ubuntu-latest
     permissions:
@@ -68,12 +101,23 @@ jobs:
         if: success()
         id: maven-build
         run: |
-          ./mvnw versions:set -DnewVersion=SHA-${{ env.SHA }} -DgenerateBackupPoms=false
+          ./mvnw versions:set -DnewVersion=${{ inputs.release_tag }} -DgenerateBackupPoms=false
           ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml package -DskipTests
       - name: Publish to GitHub Packages
-        if: success()
+        if: |
+          success() && ( inputs.dry_run == false )
         id: publish
         run: |
           ./mvnw --settings ${{ github.workspace }}/.mvn/settings.xml --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release Update - ${{ inputs.release_tag }}
+        if: |
+          success() && ( inputs.dry_run == false )
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "v${{ inputs.release_tag }}"
+          append_body: true
+          body: |
+            - GitHub Packages Maven URL: ${{ env.REPOSITORY_URL }}
+          token: ${{ secrets.GITHUB_TOKEN }}
