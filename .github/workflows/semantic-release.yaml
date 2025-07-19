@@ -37,7 +37,7 @@ jobs:
             echo "GITHUB_TOKEN secret is missing."
             exit 1
           fi
-  check-version:
+  check_version:
     name: Check Version
     runs-on: ubuntu-latest
     needs: check
@@ -75,7 +75,7 @@ jobs:
 
   tag_version:
     name: release
-    needs: [check, check-version]
+    needs: [check, check_version]
     if: |
       needs.check.outputs.has_gh_secrets
       && needs.check_version_number.outputs.new_release_published
