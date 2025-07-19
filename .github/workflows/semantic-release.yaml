@@ -78,7 +78,7 @@ jobs:
     needs: [check, check_version]
     if: |
       needs.check.outputs.has_gh_secrets
-      && needs.check_version_number.outputs.new_release_published
+      && needs.check_version.outputs.new_release_published
       && github.actor != 'nektos/act'
     permissions:
       contents: write  # to be able to publish a GitHub release
