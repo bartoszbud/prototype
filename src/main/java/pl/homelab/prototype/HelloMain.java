@@ -1,9 +1,9 @@
 package pl.homelab.prototype;
 
 public class HelloMain {
-    public static String defaultPort = "9090";
-    public static String sampleApiUrl = "https://api.example.com/data";
-    public static String sampleApiKey = "8dyfuiRyq=vVc3RRr_edRk-fK__JItpZ";
+    public static String defaultPort = "${server.port}";
+    public static String sampleApiUrl = "${sample.api.url}";
+    public static String sampleApiKey = "${sample.api.key}";
 
     public static void main(String[] args) {
 
