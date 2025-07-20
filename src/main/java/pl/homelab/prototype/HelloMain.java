@@ -2,6 +2,8 @@ package pl.homelab.prototype;
 
 public class HelloMain {
     public static String defaultPort = "9090";
+    public static String sampleApiUrl = "https://api.example.com/data";
+    public static String sampleApiKey = "8dyfuiRyq=vVc3RRr_edRk-fK__JItpZ";
 
     public static void main(String[] args) {
 
@@ -9,5 +11,7 @@ public class HelloMain {
         MyServer httpServer = new MyServer();
         httpServer.Start(port);
 
+        ApiConnection apiConnection = new ApiConnection(sampleApiUrl, sampleApiKey);
+        apiConnection.sendGetRequest();
     }
 }
