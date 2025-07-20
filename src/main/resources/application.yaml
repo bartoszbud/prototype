@@ -1,3 +1,11 @@
 spring:
   application:
     name: prototype
+
+server:
+  port: 9090
+  
+sample:
+  api:
+    url: https://api.example.com/data
+    key: 
