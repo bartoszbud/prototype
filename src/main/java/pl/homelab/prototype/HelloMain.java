@@ -1,7 +1,7 @@
 package pl.homelab.prototype;
 
 public class HelloMain {
-    public static String defaultPort = "${server.port}";
+    public static String defaultPort = "9090";
     public static String sampleApiUrl = "${sample.api.url}";
     public static String sampleApiKey = "${sample.api.key}";
 
