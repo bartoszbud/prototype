@@ -27,5 +27,5 @@ jobs:
       ignore-unfixed: true
       format: table
       upload-artifact: true
-      upload-release-assets: false
-      upload-results-github-security: false
+      upload-release-assets: true
+      upload-results-github-security: true
