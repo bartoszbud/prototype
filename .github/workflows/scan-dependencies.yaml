@@ -23,7 +23,7 @@ jobs:
     uses: bartoszbud/actions/.github/workflows/sast.yaml@main
     with:
       exit-code: 1 # fail the job if issues are found
-      severity: HIGH,CRITICAL
+      severity: LOW,MEDIUM,HIGH,CRITICAL
       ignore-unfixed: true
       format: table
       upload-artifact: true
