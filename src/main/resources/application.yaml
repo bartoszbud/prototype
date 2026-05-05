@@ -3,7 +3,7 @@ spring:
     name: prototype
 
 server:
-  port: 9090
+  port: 8080
   
 sample:
   api:
